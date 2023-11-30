@@ -1,6 +1,7 @@
 package dev.ganesh.productServicettsevening.controllers;
 
 import dev.ganesh.productServicettsevening.dtos.ProductDto;
+import dev.ganesh.productServicettsevening.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 /*
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 *
 * */
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     /*
@@ -27,31 +29,39 @@ public class ProductController {
     *
     * */
 
-    @GetMapping("/products")
+    private ProductService productService;
+
+    public ProductController(ProductService productService){
+
+        this.productService = productService;
+
+    }
+
+    @GetMapping()
     public String getAllProducts(){
 
         return "Getting ALL Products";
     }
 
-    @GetMapping("/products/{productId}")
+    @GetMapping("/{productId}")
     public String getSingleProduct(@PathVariable("productId") Long productId){
 
         return "Returning Single Product with id: " + productId;
     }
 
-    @PostMapping("/products")
+    @PostMapping("")
     public String addNewProduct(@RequestBody ProductDto productDto){
 
         return "Adding new product" + productDto;
     }
 
-    @PostMapping("/products/{productId}")
+    @PostMapping("{productId}")
     public String updateProduct(@PathVariable("productId") Long productId){
 
         return "Updating a Product with id: " + productId;
     }
 
-    @DeleteMapping("/products/{productId}")
+    @DeleteMapping("{productId}")
     public String deleteProduct(@PathVariable("productId") Long productId){
 
         return "Deleting a Product with id: " + productId;
