@@ -1,0 +1,56 @@
+About @RestController in ProductController.java:
+
+@RestController is serving http request.
+
+RestController tells Spring that this particular class (ProductController) is having restapis internally. This particular class has some api implemented.
+
+So basically @RestController annotation will basically register that particular class in spring dispatcher.
+
+So @RestController annotation tells spring that in this particular class there are endpoints are implemented, please register those in your dispatcher, if you get some rest request.
+
+***************************************************************
+
+About @GetMapping in ProductController.java:
+
+@GetMapping method will serve get request on specific endpoints like (/products, /category) etc.
+
+whenever /products endpoint is called then please call the respective mapped method
+
+Note:
+while executing application, we can see that spring dispatcherServlet is getting initialized post tomcat started.
+
+dispatcherServlet is internally handling requests.
+
+***************************************************************
+
+About GetMapping and PathVariable at getSingleProduct() in ProductController.java:
+
+1. We can't put generic endpoint like /products or /category for a single prodcut.
+2. so we need to have a product id to display specific product.
+3. In GetMapping("/products/{productId}") -> states that declaring a variable name with curly braces to specify the product id.
+4. getSingleProduct(@PathVariable("productId") Long productId) -> Read the value of this variable @PathVariable("productId") name(productId) in the path and put that particular value in Long productId
+***************************************************************
+
+About addNewProduct(@RequestBody ProductDto productDto) in ProductController.java:
+
+Dtos (Data Transfer Object) -> whenever we are receiving data from outside or sending data outside what are the type of objects that will create to get data from outside or to send data outside. We need Data Transfer Object (DTOS)
+
+So we are crating ProductDto.java which has these parameters to insert these types.
+
+@RequestBody ProductDto productDto -> we are telling spring that please get ProductDto object from requestbody. What spring does on our behalf is, whatever json it receives, it will try to convert that json into object of Productdto.
+
+onebyone it will try to call the all the setters of ProductDto and try to create objects of ProductDto.
+
+
+***************************************************************
+
+{
+    "title": "test product",
+    "price": 13.5,
+    "description": "lorem ipsum set",
+    "image": "https://i.pravatar.cc",
+    "category": "electronic"
+}
+
+
+***************************************************************
